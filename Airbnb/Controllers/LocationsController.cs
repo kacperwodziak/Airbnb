@@ -83,6 +83,7 @@ namespace Airbnb.Controllers
         }
 
         // GET: apiLocations/UnAvailableDates/<locationId>
+        [HttpPost("UnAvailable/{id}")]
 
 
         // POST: api/Locations/Search

@@ -19,11 +19,6 @@ namespace Airbnb
             CreateMap<Location, PriceDTO>().
                 ForMember(dest => dest.Price, opt => opt.
                 MapFrom(src => src.PricePerDay));
-            //CreateMap<Location, DetailsDTO>()
-            //    .ForMember(dest => dest.Type, opt => opt.MapFrom(src => (int)src.Type))
-            //    .ForMember(dest => dest.Features, opt => opt.MapFrom(src => (int)src.Features))
-            //    .ForMember(dest => dest.Landlord, opt => opt.Ignore())
-            //    .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Images));
         }
     }
 }

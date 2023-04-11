@@ -101,5 +101,15 @@
 
             return locations.Select(location => _mapper.Map<Location2DTO>(location));
         }
+        public async Task<UnAvailableDatesDTO> GetUnAvailableDates(int id, CancellationToken cancellationToken)
+        {
+            var location = await _locationRepository.GetLocationByIdAsync(id, cancellationToken);
+
+            var reservations = location.Reservations;
+            var unavailableDates = reservations.SelectMany(r => Enumerable.Range(0, (r.EndDate - r.StarDate).Days + 1).Select(i => r.StarDate.AddDays(i))).ToList();
+
+            return new UnAvailableDatesDTO { UnavailableDates = unavailableDates };
+
+        }
     }
 }

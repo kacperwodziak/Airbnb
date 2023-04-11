@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Airbnb.Models;
 using Microsoft.EntityFrameworkCore;
-using Airbnb.Models;
 
 namespace Airbnb.Data
 {
     public class AirbnbContext : DbContext
     {
-        public AirbnbContext (DbContextOptions<AirbnbContext> options)
+        public AirbnbContext(DbContextOptions<AirbnbContext> options)
             : base(options)
         {
         }
@@ -19,7 +15,7 @@ namespace Airbnb.Data
             base.OnConfiguring(optionsBuilder);
         }
 
-        public DbSet<Airbnb.Models.Landlord> Landlord { get; set; } = default!;
+        public DbSet<Airbnb.Models.Landlord> Landlord { get; set; }
 
         public DbSet<Airbnb.Models.Location> Location { get; set; }
 
@@ -29,6 +25,7 @@ namespace Airbnb.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Customer>().HasData(
                 new
                 {
@@ -169,7 +166,7 @@ namespace Airbnb.Data
                 {
                     Id = 27,
                     LocationId = 9,
-                    URL = "https://static.wikia.nocookie.net/backrooms/images/5/59/Level_188_classic.jpg/revision/latest?cb=20221009201412",
+                    URL = "https://static.wikia.nocookie.net/backrooms/images/5/59/Level_188_classic.jpg",
                     IsCover = false,
                 },
                 new
@@ -196,24 +193,30 @@ namespace Airbnb.Data
                 new
                 {
                     Id = 31,
-                    URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZjJ25xDzt_mDxxV6E9pYBpLIUT7gxJ5iuIykIpi8MNXK8oiBpGbq4M8ORdK2ozImOQ3E&usqp=CAU",
+                    URL = "https://i.redd.it/qufda7imc8l71.jpg",
                     IsCover = false,
                 },
                 new
                 {
                     Id = 32,
-                    URL = "https://steamuserimages-a.akamaihd.net/ugc/1839155758319318939/62B917FE2C2663BC82B608330B7589FADDF2D2DF/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
+                    URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZjJ25xDzt_mDxxV6E9pYBpLIUT7gxJ5iuIykIpi8MNXK8oiBpGbq4M8ORdK2ozImOQ3E&usqp=CAU",
                     IsCover = false,
                 },
                 new
                 {
                     Id = 33,
-                    URL = "https://static.wikia.nocookie.net/underthedome/images/1/11/Big_Jim_313_CROP.jpg/revision/latest?cb=20150913053305",
+                    URL = "https://steamuserimages-a.akamaihd.net/ugc/1839155758319318939/62B917FE2C2663BC82B608330B7589FADDF2D2DF/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
                     IsCover = false,
                 },
                 new
                 {
                     Id = 34,
+                    URL = "https://static.wikia.nocookie.net/underthedome/images/1/11/Big_Jim_313_CROP.jpg/revision/latest?cb=20150913053305",
+                    IsCover = false,
+                },
+                new
+                {
+                    Id = 35,
                     URL = "https://steamuserimages-a.akamaihd.net/ugc/1474317626928641127/A8FF6D1FA0EBFCC33F3F69409757A1B45AD93D4E/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
                     IsCover = false,
                 }
@@ -222,7 +225,7 @@ namespace Airbnb.Data
                 new
                 {
                     Id = 1,
-                    AvatarId = 21,
+                    AvatarId = 31,
                     FirstName = "Kacper",
                     LastName = "Wodziak",
                     Age = 19,
@@ -230,7 +233,7 @@ namespace Airbnb.Data
                 new
                 {
                     Id = 2,
-                    AvatarId = 22,
+                    AvatarId = 32,
                     FirstName = "Jeff",
                     LastName = "Mane",
                     Age = 21,
@@ -238,7 +241,7 @@ namespace Airbnb.Data
                 new
                 {
                     Id = 3,
-                    AvatarId = 23,
+                    AvatarId = 33,
                     FirstName = "Saul",
                     LastName = "Badman",
                     Age = 43,
@@ -246,7 +249,7 @@ namespace Airbnb.Data
                 new
                 {
                     Id = 4,
-                    AvatarId = 24,
+                    AvatarId = 34,
                     FirstName = "Jim",
                     LastName = "Grand",
                     Age = 67,
@@ -254,7 +257,7 @@ namespace Airbnb.Data
                 new
                 {
                     Id = 5,
-                    AvatarId = 25,
+                    AvatarId = 35,
                     FirstName = "Gertrude",
                     LastName = "Mullins",
                     Age = 84,
@@ -317,7 +320,7 @@ namespace Airbnb.Data
                 {
                     Id = 9,
                     LandlordId = 1,
-                    Title = "A budget hotel room.",
+                    Title = "Budget hotel room.",
                     SubTitle = "Almere",
                     Description = "Level 188",
                     Rooms = 1,

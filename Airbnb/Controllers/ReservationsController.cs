@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Airbnb.Data;
 using Airbnb.Models;
+using Airbnb.Models.DTO;
+using Airbnb.Service;
+using System.Threading;
+using AutoMapper;
 
 namespace Airbnb.Controllers
 {
@@ -14,32 +18,16 @@ namespace Airbnb.Controllers
     [ApiController]
     public class ReservationsController : ControllerBase
     {
-        private readonly AirbnbContext _context;
+        private readonly IReservationService _reservationService;
+        private readonly IMapper _mapper;
 
-        public ReservationsController(AirbnbContext context)
+        public ReservationsController(IReservationService reservationService, IMapper mapper)
         {
-            _context = context;
+            _reservationService = reservationService;
+            _mapper = mapper;
         }
 
-        //// GET: api/Reservations
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations(CancellationToken cancellationToken)
-        //{
-        //    return await _context.Reservation.ToListAsync(cancellationToken);
-        //}
+        // POST: api/Reservations
 
-        //// GET: api/Reservations/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Reservation>> GetReservations(int id, CancellationToken cancellationToken)
-        //{
-        //    var reservation = await _context.Reservation.FindAsync(id, cancellationToken);
-
-        //    if (reservation == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return reservation;
-        //}
     }
 }
