@@ -13,14 +13,6 @@ namespace Airbnb.Repository
         {
             _context = context;
         }
-        //public async Task<IEnumerable<Reservation>> GetAll(CancellationToken cancellationToken)
-        //{
-        //    return await _context.Reservation.ToListAsync(cancellationToken);
-        //}
-        //public async Task<Reservation> GetById(int id, CancellationToken cancellationToken)
-        //{
-        //    return await _context.Reservation.FindAsync(id, cancellationToken);
-        //}
 
       
         public void Add(Reservation reservation, CancellationToken cancellationToken)

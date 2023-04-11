@@ -49,7 +49,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddControllers();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
-builder.Services.AddScoped<IReservationService, ReservationsService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

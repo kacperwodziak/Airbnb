@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Airbnb.Data;
 using Airbnb.Models;
 using Airbnb.Models.DTO;
-using Airbnb.Service;
+using Airbnb.Services;
 using System.Threading;
 using AutoMapper;
 
