@@ -13,5 +13,6 @@ namespace Airbnb.Services
         public Task<PriceDTO> GetMaxPrice(CancellationToken cancellationToken);
         public Task<DetailsDTO> GetDetails(int Id, CancellationToken cancellationToken);
         public Task<IEnumerable<Location2DTO>> SearchLocation(SearchDTO searchDTO, CancellationToken cancellationToken);
+        public Task<UnAvailableDatesDTO> GetUnAvailableDates(int id, CancellationToken cancellationToken);
     }
 }

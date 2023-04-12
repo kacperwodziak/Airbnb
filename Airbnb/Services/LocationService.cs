@@ -106,10 +106,9 @@
             var location = await _locationRepository.GetLocationByIdAsync(id, cancellationToken);
 
             var reservations = location.Reservations;
-            var unavailableDates = reservations.SelectMany(r => Enumerable.Range(0, (r.EndDate - r.StarDate).Days + 1).Select(i => r.StarDate.AddDays(i))).ToList();
+            var unavailableDates = reservations.SelectMany(r => Enumerable.Range(0, (r.EndDate - r.StartDate).Days + 1).Select(i => r.StartDate.AddDays(i))).ToList();
 
-            return new UnAvailableDatesDTO { UnavailableDates = unavailableDates };
-
+            return new UnAvailableDatesDTO { UnAvailableDates = unavailableDates };
         }
     }
 }

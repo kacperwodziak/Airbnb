@@ -2,37 +2,46 @@
 using Airbnb.Models.DTO;
 using Airbnb.Models;
 using AutoMapper;
+using Airbnb.Repository;
 
 namespace Airbnb.Services
 {
     public class ReservationService : IReservationService
     {
         private readonly IReservationRepository _reservationRepository;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly ILocationRepository _locationRepository;
         private readonly IMapper _mapper;
-        public ReservationService(IMapper mapper, IReservationRepository reservationRepository)
+        public ReservationService(IReservationRepository reservationRepository, ICustomerRepository customerRepository, ILocationRepository locationRepository, IMapper mapper)
         {
             _reservationRepository = reservationRepository;
+            _customerRepository = customerRepository;
+            _locationRepository = locationRepository;
             _mapper = mapper;
         }
         public async Task<ReservationResponseDTO> PostReservation(ReservationRequestDTO reservationRequestDTO, CancellationToken cancellationToken)
         {
-            //get a customer from the email  ZELF DOEN
-            var customer = await _reservationRepository.GetCustomerByEmail(reservationRequestDTO.Email, cancellationToken);
+            var customer = await _customerRepository.GetEmailById(reservationRequestDTO.Email, cancellationToken);
 
-            //get location from locationid ZLEF DOEN
-            var location = await _reservationRepository.GetLocationById(reservationRequestDTO.LocationId, cancellationToken);
+            var location = await _locationRepository.GetLocationByIdAsync(reservationRequestDTO.LocationId, cancellationToken);
 
-            //make from a reservationrequest a reservation
+            if (customer == null) {
+                customer = new Customer
+                {
+                    FirstName = reservationRequestDTO.FirstName,
+                    LastName = reservationRequestDTO.LastName,
+                    Email = reservationRequestDTO.Email
+                };
+            }
 
-            //if the customer doesnt exist, add it 
-            Reservation reservation = new Reservation
+        Reservation reservation = new Reservation
             {
                 Location = location,
-                StarDate = reservationRequestDTO.StartDate,
+                StartDate = reservationRequestDTO.StartDate,
                 EndDate = reservationRequestDTO.EndDate,
                 Customer = customer
             };
-            //await the add of the repository 
+
             _reservationRepository.Add(reservation, cancellationToken);
             _reservationRepository.Save();
 
@@ -40,7 +49,7 @@ namespace Airbnb.Services
             {
                 LocationName = location.Title,
                 CustomerName = customer.FirstName + " " + customer.LastName,
-                Price = location.PricePerDay * (reservation.StarDate - reservation.EndDate).Days
+                Price = location.PricePerDay * (reservation.EndDate - reservation.StartDate).Days
             };
             return post;
         }

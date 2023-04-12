@@ -29,9 +29,23 @@ namespace Airbnb.Controllers
 
         //GET: api/Locations
         [HttpGet]
-        public async Task<IEnumerable<Location2DTO>> GetLocation(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<Location2DTO>>> GetLocation(CancellationToken cancellationToken)
         {
-            return await _locationService.GetLocation2(cancellationToken);
+            try
+            {
+                var getLocation = await _locationService.GetLocation2(cancellationToken);
+
+                if (getLocation == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(getLocation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Airbnb.Models;
+using Airbnb.Models.DTO;
 
 namespace Airbnb.Interfaces
 {

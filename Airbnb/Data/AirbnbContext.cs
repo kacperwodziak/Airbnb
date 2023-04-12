@@ -23,6 +23,8 @@ namespace Airbnb.Data
 
         public DbSet<Airbnb.Models.Image> Image { get; set; }
 
+        public DbSet<Airbnb.Models.Reservation> Reservation { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

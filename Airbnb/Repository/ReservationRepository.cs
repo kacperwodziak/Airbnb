@@ -13,8 +13,6 @@ namespace Airbnb.Repository
         {
             _context = context;
         }
-
-      
         public void Add(Reservation reservation, CancellationToken cancellationToken)
         {
             _context.Add(reservation);

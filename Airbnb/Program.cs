@@ -11,6 +11,7 @@ using Airbnb.Services;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,9 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() { Title = "CloudBnB API v1", Version = "v1", Description = "Versie 1 van de API", });
     options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo() { Title = "CloudBnB API v2", Version = "v2", Description = "Versie 2 van de API", });
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
 
     // var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     // options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
@@ -45,9 +49,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

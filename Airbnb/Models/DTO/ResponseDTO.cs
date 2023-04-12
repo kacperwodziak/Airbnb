@@ -2,7 +2,7 @@
 {
     public class UnAvailableDatesDTO
     {
-        public List<DateTime> UnavailableDates { get; set; }
+        public List<DateTime> UnAvailableDates { get; set; }
     }
     public class ReservationResponseDTO
     {

@@ -10,6 +10,7 @@ using Airbnb.Models;
 using AutoMapper;
 using Airbnb.Models.DTO;
 using Airbnb.Services;
+using System.Threading;
 
 namespace Airbnb.Controllers
 {
@@ -30,74 +31,127 @@ namespace Airbnb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LocationDTO>>> GetLocation(CancellationToken cancellationToken)
         {
-            var getLocation = await _locationService.GetLocation(cancellationToken);
-
-            if (getLocation == null)
+            try
             {
-                return NotFound();
-            }
+                var getLocation = await _locationService.GetLocation(cancellationToken);
 
-            return Ok(getLocation);
+                if (getLocation == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(getLocation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Locations/GetAll
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Location>>> GetAllLocations(CancellationToken cancellationToken)
         {
-            var getAllLocations = await _locationService.GetAllLocations(cancellationToken);
-
-            if (getAllLocations == null) 
+            try
             {
-                return NotFound();
-            }
+                var getAllLocations = await _locationService.GetAllLocations(cancellationToken);
 
-            return Ok(getAllLocations);
+                if (getAllLocations == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(getAllLocations);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Locations/GetMaxPrice
         [HttpGet("GetMaxPrice")]
         public async Task<ActionResult<IEnumerable<Location>>> GetMaxPrice(CancellationToken cancellationToken)
         {
-            var maxPrice = await _locationService.GetMaxPrice(cancellationToken);
-
-            if (maxPrice == null)
+            try
             {
-                return NotFound();
-            }
+                var maxPrice = await _locationService.GetMaxPrice(cancellationToken);
 
-            return Ok(maxPrice);
+                if (maxPrice == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(maxPrice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Locations/GetDetails/5
         [HttpGet("GetDetails/{id}")]
         public async Task<ActionResult<Location>> GetDetails(int id, CancellationToken cancellationToken)
         {
-            var details = await _locationService.GetDetails(id, cancellationToken);
-
-            if (details == null)
+            try
             {
-                return NotFound();
-            }
+                var details = await _locationService.GetDetails(id, cancellationToken);
 
-            return Ok(details);
+                if (details == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(details);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: apiLocations/UnAvailableDates/<locationId>
-        [HttpPost("UnAvailable/{id}")]
+        [HttpGet("UnAvailableDates/{id}")]
+        public async Task<ActionResult<UnAvailableDatesDTO>> GetUnAvailableDates(int id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var unAvailableDates = await _locationService.GetUnAvailableDates(id, cancellationToken);
+
+                if (unAvailableDates == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(unAvailableDates);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
         // POST: api/Locations/Search
         [HttpPost("Search")]
         public async Task<ActionResult<IEnumerable<Location>>> SearchLocation(SearchDTO searchDTO, CancellationToken cancellationToken)
         {
-            var searchLocation = await _locationService.SearchLocation(searchDTO, cancellationToken);
-
-            if (searchLocation == null)
+            try
             {
-                return NotFound();
-            }
+                var searchLocation = await _locationService.SearchLocation(searchDTO, cancellationToken);
 
-            return Ok(searchLocation);
+                if (searchLocation == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(searchLocation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

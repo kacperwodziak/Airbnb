@@ -11,6 +11,7 @@ using Airbnb.Models.DTO;
 using Airbnb.Services;
 using System.Threading;
 using AutoMapper;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Airbnb.Controllers
 {
@@ -28,6 +29,26 @@ namespace Airbnb.Controllers
         }
 
         // POST: api/Reservations
+        [HttpPost]
+        public async Task<ActionResult<ReservationResponseDTO>> PostReservation(ReservationRequestDTO reservationRequestDTO, CancellationToken cancellationToken)
+        {
+            try
+            {
+                ReservationResponseDTO reservation;
 
+                reservation = await _reservationService.PostReservation(reservationRequestDTO, cancellationToken);
+
+                if (reservation == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(reservation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

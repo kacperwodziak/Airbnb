@@ -20,6 +20,10 @@ namespace Airbnb.Repository
         {
             return await _context.Customer.FindAsync(id, cancellationToken);
         }
+        public async Task<Customer> GetEmailById(string email, CancellationToken cancellationToken)
+        {
+            return await _context.Customer.FirstOrDefaultAsync(c => c.Email == email, cancellationToken);
+        }
         public void Save()
         {
             _context.SaveChanges();
