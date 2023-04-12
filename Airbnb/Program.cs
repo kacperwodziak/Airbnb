@@ -32,9 +32,6 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 
-    // var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    // options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-
     options.ResolveConflictingActions(apiDescriptions => apiDescriptions.FirstOrDefault());
     // options.CustomSchemaIds(x => x.FullName);
 });
