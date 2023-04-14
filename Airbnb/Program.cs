@@ -33,7 +33,6 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 
     options.ResolveConflictingActions(apiDescriptions => apiDescriptions.FirstOrDefault());
-    // options.CustomSchemaIds(x => x.FullName);
 });
 
 builder.Services.AddDbContext<AirbnbContext>(options =>
@@ -58,7 +57,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-// builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddVersionedApiExplorer(setup =>
 {
     setup.GroupNameFormat = "'v'VVV";

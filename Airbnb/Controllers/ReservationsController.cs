@@ -28,6 +28,12 @@ namespace Airbnb.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Creates a new reservation
+        /// </summary>
+        /// <param name="reservationRequestDTO">A DTO containing the reservation request details.</param>
+        /// <param name="cancellationToken">A CancellationToken object used to cancel the request if needed.</param>
+        /// <returns>The created reservation along with its details.</returns>
         // POST: api/Reservations
         [HttpPost]
         public async Task<ActionResult<ReservationResponseDTO>> PostReservation(ReservationRequestDTO reservationRequestDTO, CancellationToken cancellationToken)

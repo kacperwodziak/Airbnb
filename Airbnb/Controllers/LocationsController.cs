@@ -27,6 +27,11 @@ namespace Airbnb.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Retrieves a list of all locations.
+        /// </summary>
+        /// <param name="cancellationToken">A CancellationToken object used to cancel the request if needed.</param>
+        /// <returns>A list of all locations.</returns>
         //GET: api/Locations
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LocationDTO>>> GetLocation(CancellationToken cancellationToken)
@@ -48,6 +53,11 @@ namespace Airbnb.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves a list of all locations.
+        /// </summary>
+        /// <param name="cancellationToken">A CancellationToken object used to cancel the request if needed.</param>
+        /// <returns>A list of all locations.</returns>
         // GET: api/Locations/GetAll
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Location>>> GetAllLocations(CancellationToken cancellationToken)
@@ -69,6 +79,11 @@ namespace Airbnb.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves the price of the location with the highest price.
+        /// </summary>
+        /// <param name="cancellationToken">A CancellationToken object used to cancel the request if needed.</param>
+        /// <returns>The price of the highest price location.</returns>
         // GET: api/Locations/GetMaxPrice
         [HttpGet("GetMaxPrice")]
         public async Task<ActionResult<IEnumerable<Location>>> GetMaxPrice(CancellationToken cancellationToken)
@@ -90,6 +105,12 @@ namespace Airbnb.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves the details of the requested location.
+        /// </summary>
+        /// <param name="id">The ID of the location to get the details for.</param>
+        /// <param name="cancellationToken">A CancellationToken object used to cancel the request if needed.</param>
+        /// <returns>A location object containing the details of the requested location.</returns>
         // GET: api/Locations/GetDetails/5
         [HttpGet("GetDetails/{id}")]
         public async Task<ActionResult<Location>> GetDetails(int id, CancellationToken cancellationToken)
@@ -111,6 +132,12 @@ namespace Airbnb.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves the unavailable dates of the requested location
+        /// </summary>
+        /// <param name="id">The ID of the location to get the unavailable dates for.</param>
+        /// <param name="cancellationToken">A CancellationToken object used to cancel the request if needed.</param>
+        /// <returns>The unavailable dates of the requested location.</returns>
         // GET: apiLocations/UnAvailableDates/<locationId>
         [HttpGet("UnAvailableDates/{id}")]
         public async Task<ActionResult<UnAvailableDatesDTO>> GetUnAvailableDates(int id, CancellationToken cancellationToken)
@@ -132,7 +159,12 @@ namespace Airbnb.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Returns a list of locations based on the search criteria.
+        /// </summary>
+        /// <param name="searchDTO">A SearchDTO object containing the search criteria.</param>
+        /// <param name="cancellationToken">A CancellationToken object used to cancel the request if needed.</param>
+        /// <returns>A list of locations matching the search criteria.</returns>
         // POST: api/Locations/Search
         [HttpPost("Search")]
         public async Task<ActionResult<IEnumerable<Location>>> SearchLocation(SearchDTO searchDTO, CancellationToken cancellationToken)

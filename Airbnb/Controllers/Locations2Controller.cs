@@ -27,6 +27,11 @@ namespace Airbnb.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Retrieves a list of all locations for the second version.
+        /// </summary>
+        /// <param name="cancellationToken">A CancellationToken object used to cancel the request if needed.</param>
+        /// <returns>A list of all locations.</returns>
         //GET: api/Locations
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Location2DTO>>> GetLocation(CancellationToken cancellationToken)
